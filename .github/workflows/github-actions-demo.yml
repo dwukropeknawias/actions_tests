@@ -1,34 +1,20 @@
 name: Github Actions Demo
-run-name: ${{ github.actor }} is testing out Github Actions!
+run-name: ABC
 on:
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'warning'
-        type: choice
-        options:
-          - info
-          - warning
-          - debug
-      print_tags:
-        description: 'True to print to STDOUT'
-        required: true
-        type: boolean
-      tags:
-        description: 'Test scenario tags'
-        required: true
-        type: string
-#      environment:
-#        description: 'Environment to run tests against'
-#        type: environment
-#        required: true
+  pull_request:
+    types:
+      - opened
+    paths:
+      - '*.py'
 
 jobs:
-  print-tag:
+  triage:
     runs-on: ubuntu-latest
-    if: ${{ inputs.print_tags }}
     steps:
-      - name: Print the input tag to STDOUT
-        run: echo  The tags are ${{ inputs.tags }}
+      - name: "comment"
+        env:
+          PR: ${{ github.event.pull_request.html_url }}
+
+        run:
+          gh pr edit $PR --add-label 'invalid'
+          gh pr comment $PR --body 'THis is deeeemo'
