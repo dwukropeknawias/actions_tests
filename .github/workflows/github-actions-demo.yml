@@ -22,4 +22,4 @@ jobs:
     steps:
       - name: publish
         run: |
-          echo 'publishing'
+          echo 'publishing 2'
