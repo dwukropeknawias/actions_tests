@@ -22,5 +22,8 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform fmt -check
+      - run: terraform init -backend=false
+      - run: terraform validate
+      - run: ls -a
 
 
