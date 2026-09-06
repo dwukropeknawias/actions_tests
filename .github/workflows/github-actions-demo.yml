@@ -3,20 +3,23 @@ run-name: ABC
 permissions:
   pull-requests: write
 on:
-  pull_request:
-    types:
-      - opened
-      - reopened
+  push:
+    branches:
+      - main
 
 jobs:
-  triage:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: "comment"
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PR: ${{ github.event.pull_request.html_url }}
-
+      - name: build
         run: |
-          gh pr edit $PR --add-label 'invalid'
-          gh pr comment $PR --body 'THis is deeeemo'
+          echo 'building'
+
+  publish:
+    needs: [build]
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - name: publish
+        run: |
+          echo 'publishing'
