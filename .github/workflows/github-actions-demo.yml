@@ -11,15 +11,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: build
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - name: testing
         run: |
-          echo 'building'
+          ls
 
-  publish:
-    needs: [build]
-    runs-on: ubuntu-latest
-    environment: production
-    steps:
-      - name: publish
-        run: |
-          echo 'publishing 2'
