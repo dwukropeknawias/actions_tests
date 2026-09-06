@@ -22,8 +22,8 @@ jobs:
         with:
           terraform_version: ${{ env.TF_VERSION }}
       - run: terraform fmt -check
-      - run: terraform init -backend=false
-      - run: terraform validate
+      - run: terraform -chdir=inftrastructure init -backend=false
+      - run: terraform -chdir=inftrastructure validate
       - run: ls -a
 
 
