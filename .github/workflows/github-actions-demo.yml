@@ -1,5 +1,7 @@
 name: Github Actions Demo
 run-name: ABC
+permissions:
+  pull-requests: write
 on:
   pull_request:
     types:
@@ -16,4 +18,5 @@ jobs:
           PR: ${{ github.event.pull_request.html_url }}
 
         run: |
+          gh pr edit $PR --add-label 'invalid'
           gh pr comment $PR --body 'THis is deeeemo'
