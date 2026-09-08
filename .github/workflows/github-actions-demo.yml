@@ -16,6 +16,8 @@ jobs:
     defaults:
       run:
         working-directory: infrastructure
+    env:
+      WITAMY: witanko powitanko
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: testing
@@ -35,5 +37,6 @@ jobs:
       - run: tflint --version
       - run: tflint --init
       - run: tflint -f compact
+      - run: echo "$WITAMY"
 
 
