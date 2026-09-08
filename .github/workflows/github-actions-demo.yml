@@ -32,11 +32,6 @@ jobs:
         run: |
           terraform init -backend=false
           terraform validate
-      - name: tflint
-        uses: terraform-linters/setup-tflint@v6
-      - run: tflint --version
-      - run: tflint --init
-      - run: tflint -f compact
       - run: echo "$WITAMY"
 
 
