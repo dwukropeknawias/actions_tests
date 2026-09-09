@@ -20,6 +20,7 @@ jobs:
       - run: echo "BUILD"
 
   testing:
+    needs: build
     runs-on: ubuntu-last
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
@@ -27,6 +28,7 @@ jobs:
 
 
   plan:
+    needs: testing
     environment: staging
     runs-on: ubuntu-last
     steps:
@@ -34,6 +36,7 @@ jobs:
       - run: echo "PLANNING"
 
   apply:
+    needs: plan
     environment: staging
     runs-on: ubuntu-last
     steps:
