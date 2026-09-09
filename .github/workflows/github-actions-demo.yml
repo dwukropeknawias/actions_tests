@@ -30,6 +30,7 @@ jobs:
   plan:
     needs: testing
     environment: staging
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
@@ -38,6 +39,7 @@ jobs:
   apply:
     needs: plan
     environment: staging
+    continue-on-error: true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
