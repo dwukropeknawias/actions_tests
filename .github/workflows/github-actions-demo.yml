@@ -13,25 +13,29 @@ env:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: infrastructure
     env:
       WITAMY: witanko powitanko
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - name: testing
-        run: |
-          ls -a
-      - uses: hashicorp/setup-terraform@v4.0.1
-        with:
-          terraform_version: ${{ env.TF_VERSION }}
-      - run: terraform fmt -check
-        continue-on-error: true
-      - name: Terraform validate
-        run: |
-          terraform init -backend=false
-          terraform validate
-      - run: echo "$WITAMY"
+      - run: echo "BUILD"
+
+  testing:
+    runs-on: ubuntu-last
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - run: echo "TESTING"
 
 
+  plan:
+    environment: staging
+    runs-on: ubuntu-last
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - run: echo "PLANNING"
+
+  apply:
+    environment: staging
+    runs-on: ubuntu-last
+    steps:
+      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
+      - run: echo "PLANNING"
