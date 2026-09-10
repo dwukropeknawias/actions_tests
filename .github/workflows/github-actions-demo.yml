@@ -3,9 +3,7 @@ run-name: ABC
 permissions:
   pull-requests: write
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 env:
   TF_VERSION: "1.15"
@@ -17,30 +15,11 @@ jobs:
       WITAMY: witanko powitanko
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - run: echo "BUILD"
+      - name: Show checked out commit
+        run: |
+          echo "Checked out commit:"
+          git rev-parse HEAD
+          
+          echo "GitHub SHA:"
+          echo "$GITHUB_SHA"
 
-  testing:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - run: echo "TESTING"
-
-
-  plan:
-    needs: testing
-    environment: staging
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - run: echo "PLANNING"
-
-  apply:
-    needs: plan
-    environment: staging
-    continue-on-error: true
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - run: echo "PLANNING"
