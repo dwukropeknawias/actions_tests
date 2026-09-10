@@ -17,9 +17,10 @@ jobs:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
       - name: Show checked out commit
         run: |
-          echo "Checked out commit:"
-          git rev-parse HEAD
-          
-          echo "GitHub SHA:"
-          echo "$GITHUB_SHA"
+          echo "GITHUB_SHA: $GITHUB_SHA"
+          echo "GITHUB_REF: $GITHUB_REF"
+          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
+          echo "HEAD: $(git rev-parse HEAD)"
+          echo "HEAD commit:"
+          git show -s --format='%H %P %s' HEAD
 
