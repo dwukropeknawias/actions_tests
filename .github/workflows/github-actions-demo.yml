@@ -3,9 +3,7 @@ run-name: ABC
 permissions:
   pull-requests: write
 on:
-  push:
-    branches:
-      - main
+  pull_request:
 
 env:
   TF_VERSION: "1.15"
