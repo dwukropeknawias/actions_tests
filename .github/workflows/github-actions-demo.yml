@@ -21,8 +21,6 @@ jobs:
           images: bajlando
           tags: |
             type=sha,prefix=,format=short
-        env:
-          DOCKER_METADATA_PR_HEAD_SHA: true
 
       - run: echo ${{ steps.meta.outputs.tags }} ok1
 
