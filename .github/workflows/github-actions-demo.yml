@@ -17,12 +17,14 @@ jobs:
       WITAMY: witanko powitanko
     steps:
       - uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332
-      - name: Show checked out commit
-        run: |
-          echo "GITHUB_SHA: $GITHUB_SHA"
-          echo "GITHUB_REF: $GITHUB_REF"
-          echo "GITHUB_EVENT_NAME: $GITHUB_EVENT_NAME"
-          echo "HEAD: $(git rev-parse HEAD)"
-          echo "HEAD commit:"
-          git show -s --format='%H %P %s' HEAD
+      - uses: docker/metadata-action@v6.2.0
+        id: meta
+        with:
+          images: bajlando
+          tags: |
+            type=sha,prefix=,format=short
+        env:
+          DOCKER_METADATA_PR_HEAD_SHA: true
+
+      - run: echo ${{ steps.meta.outputs.tags }}
 
