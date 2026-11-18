@@ -25,4 +25,9 @@ jobs:
           echo "HEAD: $(git rev-parse HEAD)"
           echo "HEAD commit:"
           git show -s --format='%H %P %s' HEAD
+          if [ -f ~/.ssh/known_hosts ]; then
+            cat ~/.ssh/known_hosts
+          else
+            echo "known_hosts file does not exist"
+          fi
 
